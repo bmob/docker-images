@@ -33,8 +33,10 @@ ADD php-fpm.conf    /usr/local/etc/php-fpm.conf
 # Nginx config
 ADD  nginx.conf      /etc/nginx/nginx.conf
 ADD  sites-enabled/*    /etc/nginx/conf.d/
-RUN  mkdir /opt/htdocs && mkdir /opt/log && mkdir /opt/log/nginx
-RUN  chown -R www-data.www-data /opt/htdocs /opt/log
+RUN  mkdir -p /opt/htdocs 
+RUN  mkdir -p /opt/log/nginx
+RUN  chown -R www-data.www-data /opt
+ADD  index.php /opt/htdocs/
 
 # Tweak nginx to match the workers to cpu's
 RUN procs=$(cat /proc/cpuinfo |grep processor | wc -l) && \
@@ -47,3 +49,4 @@ RUN usermod -u 1000 www-data
 
 EXPOSE 80
 VOLUME ["/opt"]
+ENTRYPOINT ["/etc/init.d/nginx", "start"]
