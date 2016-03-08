@@ -63,7 +63,7 @@ RUN chmod 755 /start.sh
 # Tweak nginx to match the workers to cpu's
 #RUN procs=$(cat /proc/cpuinfo |grep processor | wc -l) && \
 #sed -i -e "s/worker_processes 1/worker_processes $procs/" /etc/nginx/nginx.conf
-sed -i -e "s/worker_processes 1/worker_processes 5/" /etc/nginx/nginx.conf
+RUN sed -i -e "s/worker_processes 1/worker_processes 5/" /etc/nginx/nginx.conf
 
 # Write Permission
 RUN usermod -u 1000 www-data
