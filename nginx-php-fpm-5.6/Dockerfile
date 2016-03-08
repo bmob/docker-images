@@ -53,8 +53,8 @@ RUN ln -sf $PHP_INI_DIR/php.ini /opt/php/php.ini
 RUN  ["chown", "-R", "www-data.www-data", "/opt"]
 ADD  index.php /opt/htdocs/index.php
 
-ADD start.sh /start.sh
-RUN chmod +x /start.sh
+ADD start.sh /opt/start.sh
+RUN chmod +x /opt/start.sh
 
 # Tweak nginx to match the workers to cpu's
 RUN procs=$(cat /proc/cpuinfo |grep processor | wc -l) && \
@@ -69,4 +69,4 @@ WORKDIR /opt
 
 VOLUME ["/opt"]
 
-CMD ["/start.sh"]
+CMD ["/opt/start.sh"]
