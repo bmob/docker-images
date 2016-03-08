@@ -43,7 +43,7 @@ RUN  ["mkdir", "-p", "/opt/htdocs", "/opt/php", "/opt/nginx/conf.d"]
 
 # Nginx config
 RUN rm -Rf /etc/nginx/conf.d/* && \
-rm -Rf /etc/nginx/sites-available/default && \
+rm -Rf /etc/nginx/sites-available/default
 ADD  conf/nginx.conf      /etc/nginx/nginx.conf
 ADD  opt/nginx/conf.d/default.conf    /opt/nginx/conf.d/
 
