@@ -44,24 +44,22 @@ RUN  ["mkdir", "-p", "/opt/htdocs", "/opt/php", "/opt/nginx/conf.d"]
 # Nginx config
 RUN rm -Rf /etc/nginx/conf.d/* && \
 rm -Rf /etc/nginx/sites-available/default && \
-mkdir -p /etc/nginx/ssl/
-ADD  nginx.conf      /etc/nginx/nginx.conf
-ADD  sites-enabled/*    /opt/nginx/conf.d/
+ADD  conf/nginx.conf      /etc/nginx/nginx.conf
+ADD  opt/nginx/conf.d/default.conf    /opt/nginx/conf.d/
 
 # PHP config
 RUN rm -rf /usr/local/etc/php/php.ini
-ADD php.ini    /opt/php/php.ini
-ADD php-fpm.conf   /usr/local/etc/php-fpm.conf
+ADD opt/php/php.ini    /opt/php/php.ini
+ADD conf/php-fpm.conf   /usr/local/etc/php-fpm.conf
 RUN ln -sf /opt/php/php.ini /usr/local/etc/php/php.ini
 
 RUN chown -Rf www-data.www-data /opt/htdocs
-ADD  index.php /opt/htdocs/index.php
 
 # Supervisor Config
-ADD supervisord.conf /etc/supervisord.conf
+ADD conf/supervisord.conf /etc/supervisord.conf
 
 # Start Supervisord
-ADD start.sh /start.sh
+ADD scripts/start.sh /start.sh
 RUN chmod 755 /start.sh
 
 # Tweak nginx to match the workers to cpu's
