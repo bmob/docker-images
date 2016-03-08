@@ -33,24 +33,28 @@ RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-di
         && docker-php-ext-install mcrypt \
         && docker-php-ext-install pdo_mysql
 
-
-# PHP config
-ADD php.ini    $PHP_INI_DIR/php.ini
-ADD php-fpm.conf    $PHP_INI_DIR/conf.d/php-fpm.conf
-
 # Composer
 #ADD composer.phar /usr/local/bin/composer
 #RUN chmod 755 /usr/local/bin/composer
 
+# mkdir dir
+RUN  ["mkdir", "-p", "/opt/htdocs", "/opt/php", "/opt/nginx/conf.d"]
+
 # Nginx config
-RUN  ["mkdir", "-p", "/opt/htdocs", "/usr/local/nginx/conf.d/"]
-
 ADD  nginx.conf      /etc/nginx/nginx.conf
-ADD  sites-enabled/*    /usr/local/nginx/conf.d/
+ADD  sites-enabled/*    /opt/nginx/conf.d/
 
+# PHP config
+RUN rm -rf $PHP_INI_DIR/php.ini
+ADD php.ini    /opt/php/php.ini
+ADD php-fpm.conf    $PHP_INI_DIR/conf.d/php-fpm.conf
+RUN ln -sf $PHP_INI_DIR/php.ini /opt/php/php.ini
 
 RUN  ["chown", "-R", "www-data.www-data", "/opt"]
-ADD  index.php htdocs/
+ADD  index.php /opt/htdocs/index.php
+
+ADD start.sh /start.sh
+RUN chmod +x /start.sh
 
 # Tweak nginx to match the workers to cpu's
 RUN procs=$(cat /proc/cpuinfo |grep processor | wc -l) && \
@@ -65,4 +69,4 @@ WORKDIR /opt
 
 VOLUME ["/opt"]
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["start.sh"]
