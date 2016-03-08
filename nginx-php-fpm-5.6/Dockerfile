@@ -49,10 +49,10 @@ ADD  nginx.conf      /etc/nginx/nginx.conf
 ADD  sites-enabled/*    /opt/nginx/conf.d/
 
 # PHP config
-RUN rm -rf $PHP_INI_DIR/php.ini
+RUN rm -rf /usr/local/etc/php/php.ini
 ADD php.ini    /opt/php/php.ini
 ADD php-fpm.conf   /usr/local/etc/php-fpm.conf
-RUN ln -sf $PHP_INI_DIR/php.ini /opt/php/php.ini
+RUN ln -sf /opt/php/php.ini /usr/local/etc/php/php.ini
 
 RUN chown -Rf www-data.www-data /opt/htdocs
 ADD  index.php /opt/htdocs/index.php
