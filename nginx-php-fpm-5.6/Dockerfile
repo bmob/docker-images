@@ -69,4 +69,4 @@ WORKDIR /opt
 
 VOLUME ["/opt"]
 
-CMD ["start.sh"]
+CMD ["/start.sh"]
