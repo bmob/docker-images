@@ -39,17 +39,18 @@ RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-di
 #RUN chmod 755 /usr/local/bin/composer
 
 # mkdir dir
-RUN  ["mkdir", "-p", "/opt/htdocs", "/opt/php", "/opt/nginx/conf.d"]
+RUN  ["mkdir", "-p", "/opt/htdocs", "/opt/conf/php", "/opt/conf/nginx"]
 
 # Nginx config
 RUN rm -Rf /etc/nginx/conf.d/* && \
 rm -Rf /etc/nginx/sites-available/default
 ADD  conf/nginx.conf      /etc/nginx/nginx.conf
-ADD  conf/site-enabled/default.conf    /etc/nginx/conf.d/
+ADD  conf/site-enabled/default.conf    /opt/conf/nginx/default.conf
 
 # PHP config
-ADD conf/php.ini    /usr/local/etc/php/php.ini
+ADD conf/php.ini    /opt/conf/php/php.ini
 ADD conf/php-fpm.conf   /usr/local/etc/php-fpm.conf
+RUN ln -sf /opt/conf/php/php.ini /usr/local/etc/php/php.ini
 
 RUN chown -Rf www-data.www-data /opt/htdocs
 
@@ -72,6 +73,6 @@ EXPOSE 80
 
 WORKDIR /opt
 
-VOLUME ["/opt/htdocs"]
+VOLUME ["/opt"]
 
 CMD ["/bin/bash", "/start.sh"]
