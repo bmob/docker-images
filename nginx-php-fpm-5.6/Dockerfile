@@ -34,6 +34,20 @@ RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-di
         && docker-php-ext-install mcrypt \
         && docker-php-ext-install pdo_mysql
 
+RUN curl -fsSL 'https://xcache.lighttpd.net/pub/Releases/3.2.0/xcache-3.2.0.tar.gz' -o xcache.tar.gz \
+    && mkdir -p xcache \
+    && tar -xf xcache.tar.gz -C xcache --strip-components=1 \
+    && rm xcache.tar.gz \
+    && ( \
+        cd xcache \
+        && phpize \
+        && ./configure --enable-xcache \
+        && make -j$(nproc) \
+        && make install \
+    ) \
+    && rm -r xcache \
+    && docker-php-ext-enable xcache
+
 # Composer
 #ADD composer.phar /usr/local/bin/composer
 #RUN chmod 755 /usr/local/bin/composer
@@ -42,8 +56,8 @@ RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-di
 RUN  ["mkdir", "-p", "/opt/htdocs", "/opt/conf/php", "/opt/conf/nginx"]
 
 # Nginx config
-RUN rm -Rf /etc/nginx/conf.d/* && \
-rm -Rf /etc/nginx/sites-available/default
+RUN rm -Rf /etc/nginx/conf.d/* \
+    && rm -Rf /etc/nginx/sites-available/default
 ADD  conf/nginx.conf      /etc/nginx/nginx.conf
 ADD  conf/site-enabled/default.conf    /opt/conf/nginx/default.conf
 
