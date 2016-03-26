@@ -48,10 +48,7 @@ RUN  ["mkdir", "-p", "/opt/htdocs", "/opt/conf/java"]
 
 # tomcat config
 RUN rm -Rf /usr/local/tomcat/conf/server.xml
-ADD conf/server.xml    /opt/conf/java/server.xml
 RUN ln -sf /opt/conf/java/server.xml /usr/local/tomcat/conf/server.xml
-
-ADD scripts/hello   /opt/htdocs/
 
 RUN chmod 755 /opt/htdocs
 
