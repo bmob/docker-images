@@ -13,8 +13,7 @@ RUN set -x \
 	&& rm bin/*.bat \
 	&& rm tomcat.tar.gz*
 
-EXPOSE 8080
-CMD ["catalina.sh", "run"]
+
 
 # set UTC+8 timezone
 ENV TZ=Asia/Chongqing
@@ -28,6 +27,9 @@ RUN rm -Rf /usr/local/tomcat/conf/server.xml
 ADD conf/server.xml    /usr/local/tomcat/conf/server.xml
 
 RUN chmod 755 /opt/htdocs
+
+EXPOSE 8080
+CMD ["catalina.sh", "run"]
 
 WORKDIR /opt
 
