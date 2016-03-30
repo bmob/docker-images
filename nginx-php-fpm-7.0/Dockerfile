@@ -65,6 +65,10 @@ ADD conf/supervisord.conf /etc/supervisord.conf
 ADD scripts/start.sh /start.sh
 RUN chmod 755 /start.sh
 
+# Add net limit
+ADD scripts/httpget /usr/bin/httpget
+RUN chmod 755 /usr/bin/httpget
+
 # Tweak nginx to match the workers to cpu's
 #RUN procs=$(cat /proc/cpuinfo |grep processor | wc -l) && \
 #sed -i -e "s/worker_processes 1/worker_processes $procs/" /etc/nginx/nginx.conf
