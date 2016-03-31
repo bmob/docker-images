@@ -17,7 +17,7 @@ func main() {
 
 	addrs, err := net.InterfaceAddrs()
 	if err != nil {
-		req := fmt.Sprintf("%s?ip=null&appid=%s&bindwidth=%s", os.Args[1], APPID, BANDWIDTH)
+		req := fmt.Sprintf("%s?ip=null&appid=%s&bandwidth=%s", os.Args[1], APPID, BANDWIDTH)
 		http.Get(req)
 		os.Exit(1)
 	}
@@ -33,6 +33,7 @@ func main() {
 		}
 	}
 
-	req := fmt.Sprintf("%s?ip=%s&appid=%s&bindwidth=%s", os.Args[1], ip, APPID, BANDWIDTH)
+	req := fmt.Sprintf("%s?ip=%s&appid=%s&bandwidth=%s", os.Args[1], ip, APPID, BANDWIDTH)
+	fmt.Println("net limit url=" + req)
 	http.Get(req)
 }
