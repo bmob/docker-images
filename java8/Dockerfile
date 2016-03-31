@@ -28,6 +28,16 @@ ADD conf/server.xml    /usr/local/tomcat/conf/server.xml
 
 RUN chmod 755 /opt/htdocs
 
+# Start Supervisord
+ADD scripts/start.sh /start.sh
+RUN chmod 755 /start.sh
+
+# Add net limit
+ADD scripts/httpget /usr/bin/httpget
+RUN chmod 755 /usr/bin/httpget
+
+CMD ["/bin/bash", "/start.sh"]
+
 EXPOSE 8080
 CMD ["catalina.sh", "run"]
 
