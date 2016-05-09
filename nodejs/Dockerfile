@@ -1,4 +1,4 @@
-FROM 10.254.250.250:5000/java
+FROM docker.io/buildpack-deps:jessie
 MAINTAINER Bmob Docker Images "support@bmob.cn"
 
 # set UTC+8 timezone
