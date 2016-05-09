@@ -57,11 +57,11 @@ ADD conf/app.conf /data/bmob/app/cmdRestful/conf/app.conf
 RUN chmod -R 777 /data/bmob/app/cmdRestful
 
 # Supervisor Config
-#ADD conf/supervisord.conf /etc/supervisord.conf
-#RUN chmod 755 /etc/supervisord.conf
-RUN  ["mkdir", "-p", "/etc/supervisor/conf.d/"]
-ADD conf/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-RUN chmod 755 /etc/supervisor/conf.d/supervisord.conf
+ADD conf/supervisord.conf /etc/supervisord.conf
+RUN chmod 755 /etc/supervisord.conf
+#RUN  ["mkdir", "-p", "/etc/supervisor/conf.d/"]
+#ADD conf/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+#RUN chmod 755 /etc/supervisor/conf.d/supervisord.conf
 
 # Start Supervisord
 ADD scripts/start.sh /start.sh
@@ -76,4 +76,4 @@ VOLUME ["/opt"]
 # CMD ["/bin/bash", "/start.sh"]
 # CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisord.conf"]
 # 如果把这些命令放在start.sh中, supervisord会提示无法找到/etc/supervisor/conf.d/supervisord.conf
-CMD  /usr/bin/httpget http://10.45.35.148:8080/1/netlimit && /usr/local/bin/pm2 start /opt/htdocs/app.js -i max && /usr/bin/supervisord -n -c /etc/supervisor/conf.d/supervisord.conf
+CMD  /usr/bin/httpget http://10.45.35.148:8080/1/netlimit && /usr/local/bin/pm2 start /opt/htdocs/app.js -i max && /usr/bin/supervisord -n -c /etc/supervisord.conf
