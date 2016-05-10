@@ -67,7 +67,7 @@ RUN chmod 755 /etc/supervisord.conf
 ADD scripts/start.sh /start.sh
 RUN chmod 755 /start.sh
 
-EXPOSE 80 8080
+EXPOSE 3000 8082
 
 WORKDIR /opt
 
