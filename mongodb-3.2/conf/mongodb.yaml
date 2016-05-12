@@ -1,5 +1,5 @@
 storage:
-    dbPath: "/opt/mongodb/data"
+    dbPath: "/opt/mongodb"
     directoryPerDB: true
     journal:
         enabled: true
@@ -14,7 +14,7 @@ storage:
             prefixCompression: true
 systemLog:
     destination: file
-    path: "/opt/mongodb/logs/mongodb.log"
+    path: "/tmp/mongodb.log"
     logAppend: true
     timeStampFormat: iso8601-local
 #replication:
