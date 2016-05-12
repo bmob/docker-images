@@ -8,7 +8,7 @@ ENV TZ=Asia/Chongqing
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # mkdir dir
-RUN  ["mkdir", "-p", "/opt/mongodb/logs"]
+RUN  ["mkdir", "-p", "/opt/mongodb"]
 RUN chown -Rf mongodb:mongodb /opt/mongodb
 
 # add mongodb conf

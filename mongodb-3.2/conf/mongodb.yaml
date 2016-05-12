@@ -1,27 +1,27 @@
 storage:
     dbPath: "/opt/mongodb"
     directoryPerDB: true
-    journal:
-        enabled: true
+#    journal:
+#        enabled: true
     engine: wiredTiger
     wiredTiger:
         engineConfig:
-            cacheSizeGB: 4
+#            cacheSizeGB: 4
             directoryForIndexes: true
         collectionConfig:
             blockCompressor: snappy
         indexConfig:
             prefixCompression: true
-systemLog:
-    destination: file
-    path: "/tmp/mongodb.log"
-    logAppend: true
-    timeStampFormat: iso8601-local
+#systemLog:
+#    destination: file
+#    path: "/tmp/mongodb.log"
+#    logAppend: true
+#    timeStampFormat: iso8601-local
 #replication:
 #    oplogSizeMB: 10240
 #    replSetName: "rs1"
-processManagement:
-    fork: false
+#processManagement:
+#    fork: false
 net:
     #bindIp: 127.0.0.1,10.168.113.50
     port: 27017
