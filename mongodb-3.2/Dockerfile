@@ -14,8 +14,8 @@ RUN chown -Rf mongodb:mongodb /opt/mongodb
 # add mongodb conf
 ADD  conf/mongodb.yaml      /etc/mongodb.yaml 
 
-WORKDIR /opt/mongodb
+WORKDIR /opt
 
-VOLUME ["/opt/mongodb"]
+VOLUME ["/opt"]
 
 CMD [ "mongod", "--config", "/etc/mongodb.yaml" ]

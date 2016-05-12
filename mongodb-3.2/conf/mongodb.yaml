@@ -21,7 +21,7 @@ systemLog:
 #    oplogSizeMB: 10240
 #    replSetName: "rs1"
 processManagement:
-    fork: true
+    fork: false
 net:
     #bindIp: 127.0.0.1,10.168.113.50
     port: 27017

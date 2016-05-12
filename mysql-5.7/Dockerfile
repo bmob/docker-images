@@ -14,8 +14,8 @@ RUN chown -Rf mysql:mysql /opt/mysql
 # Redis config
 ADD conf/my.cnf   /etc/mysql/my.cnf
 
-WORKDIR /opt/mysql
+WORKDIR /opt
 
-VOLUME ["/opt/mysql"]
+VOLUME ["/opt"]
 
 CMD ["mysqld"]
