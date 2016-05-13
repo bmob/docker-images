@@ -14,6 +14,10 @@ RUN chown -Rf mysql:mysql /opt/mysql
 # Redis config
 ADD conf/my.cnf   /etc/mysql/my.cnf
 
+# Start 
+ADD start.sh /start.sh
+RUN chmod 755 /start.sh
+
 WORKDIR /opt
 
 VOLUME ["/opt"]

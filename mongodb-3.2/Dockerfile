@@ -14,8 +14,12 @@ RUN chown -Rf mongodb:mongodb /opt/mongodb
 # add mongodb conf
 ADD  conf/mongodb.yaml      /etc/mongodb.yaml 
 
+# Start 
+ADD start.sh /start.sh
+RUN chmod 755 /start.sh
+
 WORKDIR /opt
 
 VOLUME ["/opt"]
 
-CMD [ "mongod", "--config", "/etc/mongodb.yaml" ]
+CMD ["/bin/bash", "/start.sh"]
