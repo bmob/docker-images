@@ -47,15 +47,6 @@ RUN chown 777 /opt/htdocs
 ADD scripts/httpget /usr/bin/httpget
 RUN chmod 755 /usr/bin/httpget
 
-# Add cmd restful
-RUN  ["mkdir", "-p", "/data/bmob/app/cmdRestful"]
-RUN  ["mkdir", "-p", "/data/bmob/app/cmdRestful/conf"]
-
-# cmdRestful from bmob-go/cloud/cmdRestful
-ADD scripts/cmdRestful /data/bmob/app/cmdRestful/cmdRestful
-ADD conf/app.conf /data/bmob/app/cmdRestful/conf/app.conf
-RUN chmod -R 777 /data/bmob/app/cmdRestful
-
 # Supervisor Config
 ADD conf/supervisord.conf /etc/supervisord.conf
 RUN chmod 755 /etc/supervisord.conf

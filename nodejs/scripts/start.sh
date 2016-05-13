@@ -4,5 +4,5 @@
 # start nodejs process
 /usr/local/bin/pm2 start /opt/htdocs/app.js -i max
 # Start supervisord and service
-echo "start supervisord11"
+echo "start supervisord"
 /usr/bin/supervisord -n -c /etc/supervisor/conf.d/supervisord.conf
