@@ -14,8 +14,12 @@ RUN chown -Rf redis:redis /opt/redis
 # Redis config
 ADD conf/redis.conf   /usr/local/etc/redis/redis.conf
 
+# Start 
+ADD start.sh /start.sh
+RUN chmod 755 /start.sh
+
 WORKDIR /opt
 
 VOLUME ["/opt"]
 
-CMD [ "redis-server", "/usr/local/etc/redis/redis.conf" ]
+CMD ["/bin/bash", "/start.sh"]
