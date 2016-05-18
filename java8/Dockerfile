@@ -36,10 +36,11 @@ RUN chmod 755 /start.sh
 ADD scripts/httpget /usr/bin/httpget
 RUN chmod 755 /usr/bin/httpget
 
-CMD ["/bin/bash", "/start.sh"]
+
 
 EXPOSE 8080
-CMD ["catalina.sh", "run"]
+
+CMD ["/bin/bash", "/start.sh"]
 
 WORKDIR /opt
 
