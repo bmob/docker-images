@@ -67,4 +67,4 @@ VOLUME ["/opt"]
 # CMD ["/bin/bash", "/start.sh"]
 # CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisord.conf"]
 # 如果把这些命令放在start.sh中, supervisord会提示无法找到/etc/supervisor/conf.d/supervisord.conf
-CMD  /usr/bin/httpget http://10.45.35.148:8080/1/netlimit && /usr/local/bin/pm2 start /opt/htdocs/app.js -i max && /usr/bin/supervisord -n -c /etc/supervisord.conf
+CMD  /usr/bin/httpget http://10.45.35.148:8080/1/netlimit && /usr/local/bin/pm2 start /opt/htdocs/app.js -i 1 && /usr/bin/supervisord -n -c /etc/supervisord.conf
